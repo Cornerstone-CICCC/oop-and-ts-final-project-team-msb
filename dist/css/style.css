@@ -18,3 +18,7 @@ body {
 .task-column {
   width: 400px;
 }
+
+.task-item-container {
+  height: 100%;
+}

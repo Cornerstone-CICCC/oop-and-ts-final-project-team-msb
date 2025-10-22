@@ -1,12 +1,10 @@
 export class TaskContext {
     constructor(title, content) {
-        TaskContext.count++;
-        this.id = TaskContext.count;
+        this.id = crypto.randomUUID();
         this.title = title;
         this.content = content;
     }
 }
-TaskContext.count = 0;
 export class TasksContext {
     constructor(type) {
         this.type = type;
