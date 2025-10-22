@@ -1,13 +1,10 @@
 export class TaskContext {
-  readonly id: number;
+  readonly id: string;
   title: string;
   content: string;
 
-  static count: number = 0;
-
   constructor(title: string, content: string) {
-    TaskContext.count++;
-    this.id = TaskContext.count;
+    this.id = crypto.randomUUID();
     this.title = title;
     this.content = content;
   }
@@ -30,14 +27,14 @@ export class TasksContext {
     this.notifyListeners();
   }
 
-  update(id: number, updateTask: Partial<TaskContext>) {
+  update(id: string, updateTask: Partial<TaskContext>) {
     const index = this.tasks.findIndex((task) => task.id === id);
     if (index === -1) return null;
     this.tasks[index] = { ...this.tasks[index], ...updateTask };
     this.notifyListeners();
   }
 
-  delete(id: number) {
+  delete(id: string) {
     const index = this.tasks.findIndex((task) => task.id === id);
     if (index !== -1) {
       this.tasks.splice(index, 1);

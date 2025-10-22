@@ -4,11 +4,11 @@ export class Task extends Component {
         var _a, _b;
         const taskItem = document.createElement("div");
         taskItem.classList = "task-item border border-dark px-3 py-2 mb-4";
+        taskItem.draggable = true;
         taskItem.innerHTML = `
       <div class="sub-type-edit-btn d-flex justify-content-between">
         <span>type</span>
         <button class="update-btn">Edit</button>
-
       </div>
 
       <div>
@@ -22,12 +22,14 @@ export class Task extends Component {
       </div>
 
       <button class="delete-btn">Delete</button>
-
-
     `;
+        taskItem.addEventListener("dragstart", (ev) => {
+            if (ev.dataTransfer) {
+                ev.dataTransfer.setData("text/plain", this.props.task.id);
+            }
+        });
         (_a = taskItem.querySelector(".update-btn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
             this.handleEditTask();
-            console.log(this.props.task);
         });
         (_b = taskItem.querySelector(".delete-btn")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
             this.handleDeleteTask();
