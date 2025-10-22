@@ -1,4 +1,5 @@
 import { Component } from "../common/Component.js";
+import { Modal } from "./Modal.js";
 export class Task extends Component {
     render() {
         var _a, _b;
@@ -37,13 +38,34 @@ export class Task extends Component {
         return taskItem;
     }
     handleEditTask() {
-        this.props.tasksContext.update(this.props.task.id, {
-            title: "Change",
-            content: "Check to see if it's working",
+        // 모달 생성, mount -> body에 붙임
+        const modal = new Modal({
+            task: this.props.task,
+            onSave: (updated) => {
+                // TasksContext.update 호출
+                this.props.tasksContext.update(this.props.task.id, {
+                    title: updated.title,
+                    content: updated.content,
+                });
+            },
+            onClose: () => {
+                // 필요시 추가 동작
+            },
         });
+        // body에 모달 마운트 (항상 최상위)
+        modal.mount(document.body);
     }
     handleDeleteTask() {
         this.props.tasksContext.delete(this.props.task.id);
     }
+}
+/* escapeHtml 유틸 (중복되므로 나중에 common/util로 뺄 수 있음) */
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
 }
 //# sourceMappingURL=Task.js.map

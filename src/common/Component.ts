@@ -17,4 +17,11 @@ export class Component {
       container.appendChild(this.element);
     }
   }
+
+  unmount() {
+    if (this.element && this.element.parentElement) {
+      this.element.parentElement.removeChild(this.element);
+      this.element = null;
+    }
+  }
 }
