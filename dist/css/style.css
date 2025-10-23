@@ -24,7 +24,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--bg);
-  color: var(--text);
+  color: var(--card-bg);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -35,6 +35,8 @@ body {
 
 .task-column {
   width: 400px;
+  background-color: var(--column-bg);
+  border-radius: 1.2rem;
 }
 
 .task-item-container {
@@ -45,3 +47,4 @@ body {
 .task-item-container::-webkit-scrollbar {
   display: none;
 }
+

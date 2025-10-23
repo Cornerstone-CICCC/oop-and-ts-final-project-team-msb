@@ -24,40 +24,63 @@ export class Header {
           position: relative;
         }
         .search-container {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          flex: 1;
-          max-width: 300px;
-        }
-        .search-icon {
-          font-size: 1.2rem;
-          color: #ccc;
-        }
-        .search-input {
-          padding: 0.5rem 1rem;
-          background-color: #2a2a2a;
-          border: none;
-          border-radius: 8px;
-          color: white;
-          flex: 1;
-        }
-        .search-input::placeholder {
-          color: #888;
-        }
-        .app-title {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          font-size: 1.5rem;
-          font-weight: 600;
-        }
-        .info-button {
-          font-size: 1.2rem;
-          cursor: pointer;
-          color: #ccc;
-        }
-      `;
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    border: 2px solid #aaa;
+    border-radius: 12px;
+    padding: 6px 12px;
+    width: 240px;
+    height: 40px;
+    margin-left: 1rem;
+    transition: border 0.2s ease;
+  }
+
+  .search-container:hover {
+    border-color: #fff;
+  }
+
+  .search-icon {
+    font-size: 18px;
+    color: #ccc;
+    margin-right: 8px;
+  }
+
+  .search-input {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .search-results {
+    position: absolute;
+    top: 45px;
+    background-color: #2a2a2a;
+    width: 100%;
+    border-radius: 8px;
+    z-index: 10;
+    padding: 0.5rem;
+    display: none;
+  }
+
+  .search-result-item {
+    color: white;
+    padding: 0.3rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .search-result-item:hover {
+    background-color: #444;
+  }
+
+  .search-container:has(.search-result-item) .search-results {
+    display: block;
+  }
+`;
         document.head.appendChild(style);
         return header;
     }
