@@ -1,6 +1,8 @@
 import { Component } from "../common/Component.js";
 
 export class Task extends Component {
+  static firstRender = true;
+
   render() {
     const taskItem = document.createElement("div");
     taskItem.classList = "task-item border border-dark px-3 py-2 mb-4";
@@ -9,7 +11,7 @@ export class Task extends Component {
       <div class="sub-type-edit-btn d-flex justify-content-between mb-2">
         <div>
           <span><i class="fa-regular fa-circle-dot"></i></span>
-          <span>${this.props.task.type}</span>
+        <input type="text" placeholder="Enter title..." id="input-type" value = "${this.props.task.type}" />
         </div>
         <div>
           <button class="update-btn bg-transparent border border-0"><i class="fa-solid fa-pen"></i></button>
@@ -40,22 +42,53 @@ export class Task extends Component {
       this.handleDeleteTask();
     });
 
+    const inputType = taskItem.querySelector("#input-type") as HTMLInputElement;
+    inputType.addEventListener("change", () => {
+      this.handleEditTask(
+        inputType.value,
+        this.props.task.title,
+        this.props.task.content,
+      );
+      console.log(this.props.tasksContext.tasks);
+    });
+
+    if (Task.firstRender) {
+      setTimeout(() => inputType.focus(), 0);
+      Task.firstRender = false;
+    }
+
     const inputTitle = taskItem.querySelector(
       "#input-title",
     ) as HTMLInputElement;
-    inputTitle.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        this.handleEditTask(inputTitle.value, this.props.task.content);
-        console.log(this.props.tasksContext.tasks);
-      }
+    inputTitle.addEventListener("change", () => {
+      this.handleEditTask(
+        this.props.task.type,
+        inputTitle.value,
+        this.props.task.content,
+      );
+      console.log(this.props.tasksContext.tasks);
     });
 
     const inputDes = taskItem.querySelector(
       "#input-content",
     ) as HTMLInputElement;
+    inputDes.addEventListener("change", () => {
+      this.handleEditTask(
+        this.props.task.type,
+        this.props.task.title,
+        inputDes.value,
+      );
+      console.log(this.props.tasksContext.tasks);
+    });
+
+    taskItem.querySelector("#input-content") as HTMLInputElement;
     inputDes.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
-        this.handleEditTask(this.props.task.content, inputDes.value);
+        this.handleEditTask(
+          this.props.task.type,
+          this.props.task.title,
+          inputDes.value,
+        );
         console.log(this.props.tasksContext.tasks);
       }
     });
@@ -63,8 +96,9 @@ export class Task extends Component {
     return taskItem;
   }
 
-  handleEditTask(taskTitle?: string, taskDes?: string) {
+  handleEditTask(taskType?: string, taskTitle?: string, taskDes?: string) {
     this.props.tasksContext.update(this.props.task.id, {
+      type: taskType,
       title: taskTitle,
       content: taskDes,
     });
