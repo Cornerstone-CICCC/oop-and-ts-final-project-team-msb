@@ -1,6 +1,7 @@
 export class TaskContext {
-    constructor(title, content) {
+    constructor(type, title, content) {
         this.id = crypto.randomUUID();
+        this.type = type;
         this.title = title;
         this.content = content;
     }
