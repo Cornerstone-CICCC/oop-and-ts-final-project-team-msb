@@ -1,3 +1,5 @@
+import { Component } from "../common/Component.js";
+
 export class Header {
     render(): HTMLElement {
       const header = document.createElement("header");

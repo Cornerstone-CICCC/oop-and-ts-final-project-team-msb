@@ -1,20 +1,18 @@
 import { Component } from "../common/Component.js";
 import { Tasks } from "./Tasks.js";
 import { Header } from "./Header.js";
+import { Footer } from "./Footer.js";
 
 export class App extends Component {
   render() {
     const app = document.createElement("div");
     app.className = "container";
 
-    // 1. Crear el header
     const header = new Header().render();
 
-    // 2. Crear el main
     const main = document.createElement("main");
     main.className = "main d-flex p-2 justify-content-between";
 
-    // 3. Crear columnas
     const allContexts = [
       this.props.todoContext,
       this.props.inProContext,
@@ -38,9 +36,11 @@ export class App extends Component {
 
     main.append(todoColumn, inProColumn, doneColumn);
 
-    // 4. Agregar header y main al contenedor principal
-    app.append(header, main);
+    const footer = new Footer().render();
+
+    app.append(header, main, footer);
 
     return app;
   }
 }
+
