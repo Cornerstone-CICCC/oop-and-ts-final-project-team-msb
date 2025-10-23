@@ -6,9 +6,21 @@ export class App extends Component {
     render() {
         const app = document.createElement("div");
         app.className = "container";
-        const header = new Header().render();
+        // Collect all tasks from all contexts for the search functionality
+        const allTasks = [
+            ...this.props.todoContext.tasks,
+            ...this.props.inProContext.tasks,
+            ...this.props.doneContext.tasks,
+        ];
+        // Create the header and pass all tasks + click handler
+        const header = new Header(allTasks, (task) => {
+            alert(`Task selected: ${task.title}`);
+            // TODO: Add scroll or highlight logic here if needed
+        }).render();
+        // Create the main container for task columns
         const main = document.createElement("main");
         main.className = "main d-flex p-2 justify-content-between";
+        // Pass contexts to each column (To Do, In Progress, Done)
         const allContexts = [
             this.props.todoContext,
             this.props.inProContext,
@@ -26,8 +38,11 @@ export class App extends Component {
             tasksContext: this.props.doneContext,
             allContexts,
         }).render();
+        // Append all columns to main area
         main.append(todoColumn, inProColumn, doneColumn);
+        // Create and append footer
         const footer = new Footer().render();
+        // Final app layout
         app.append(header, main, footer);
         return app;
     }
