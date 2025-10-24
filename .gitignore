@@ -1,7 +1,7 @@
 # === OUTPUT BUILD ===
-dist/
-build/
-out/
+dist/*
+!dist/index.html
+!dist/css/
 
 # === MAPS ===
 *.map
