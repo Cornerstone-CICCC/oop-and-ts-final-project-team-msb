@@ -8,18 +8,17 @@
   --accent: #a29bfe;
 }
 
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -33,16 +32,93 @@ body {
   margin: auto;
 }
 
+/* Task Column */
 .task-column {
   width: 400px;
   background-color: var(--column-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.task-column h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.add-btn i {
+  color: #555;
+  transition: color 0.2s ease;
+}
+.add-btn:hover i {
+  color: #000;
 }
 
 .task-item-container {
   height: 700px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .task-item-container::-webkit-scrollbar {
   display: none;
+}
+
+/* Task Card */
+.task-item {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-in-out;
+}
+.task-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Input fields */
+.task-item input[type="text"],
+.task-item textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  background-color: var(--bg);
+  color: var(--text);
+}
+.task-item input:focus,
+.task-item textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background-color: var(--card-bg);
+}
+
+/* Header dentro de la card */
+.sub-type-edit-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sub-type-edit-btn i {
+  color: var(--accent);
+  margin-right: 0.5rem;
+}
+
+/* Botones editar/eliminar */
+.update-btn i,
+.delete-btn i {
+  color: var(--column-bg);
+  transition: color 0.2s;
+}
+.update-btn:hover i,
+.delete-btn:hover i {
+  color: var(--text);
 }
