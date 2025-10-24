@@ -1,10 +1,12 @@
 export class TaskContext {
   readonly id: string;
+  type: string;
   title: string;
   content: string;
 
-  constructor(title: string, content: string) {
+  constructor(type: string, title: string, content: string) {
     this.id = crypto.randomUUID();
+    this.type = type;
     this.title = title;
     this.content = content;
   }
@@ -50,7 +52,4 @@ export class TasksContext {
   notifyListeners() {
     this.listeners.forEach((listener) => listener(this.tasks));
   }
-
-  // onDrag(element) - Drag a task to a different column
-  // onDrop(element, targetColumn) - Drop a task on a different column
 }

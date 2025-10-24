@@ -7,6 +7,10 @@ export class App extends Component {
   render() {
     const app = document.createElement("div");
     app.className = "container";
+    app.innerHTML = `
+      <main class="main d-flex p-2 justify-content-between"></main>
+
+    `;
 
     // Collect all tasks from all contexts for the search functionality
     const allTasks = [
@@ -23,6 +27,7 @@ export class App extends Component {
 
     // Create the main container for task columns
     const main = document.createElement("main");
+    const main = app.querySelector(".main") as HTMLElement;
     main.className = "main d-flex p-2 justify-content-between";
 
     // Pass contexts to each column (To Do, In Progress, Done)
@@ -58,4 +63,5 @@ export class App extends Component {
 
     return app;
   }
+}
 }

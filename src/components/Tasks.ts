@@ -6,7 +6,10 @@ export class Tasks extends Component {
   state: { tasks: TaskContext[] };
   tasksContainer: HTMLElement | null;
 
-  constructor(props: { tasksContext: TasksContext; allContexts: TasksContext[] }) {
+  constructor(props: {
+    tasksContext: TasksContext;
+    allContexts: TasksContext[];
+  }) {
     super(props);
     this.state = { tasks: [] };
     this.tasksContainer = null;
@@ -16,7 +19,7 @@ export class Tasks extends Component {
   }
 
   handleAddTask() {
-    this.props.tasksContext.add(new TaskContext("", ""));
+    this.props.tasksContext.add(new TaskContext("", "", ""));
   }
 
   renderTasks(tasklist: TaskContext[]) {
@@ -43,14 +46,16 @@ export class Tasks extends Component {
     tasksList.innerHTML = `
       <div class="d-flex justify-content-between align-items-center mb-5">
         <h1>${this.props.tasksContext.type}</h1>
-        <button class="add-btn">+</button>
+        <button class="add-btn bg-transparent border border-0"><i class="fa-solid fa-plus fa-lg"></i></button>
       </div>
     `;
 
     this.tasksContainer = document.createElement("div");
     this.tasksContainer.className = "task-item-container";
 
-    this.tasksContainer.addEventListener("dragover", (ev) => ev.preventDefault());
+    this.tasksContainer.addEventListener("dragover", (ev) =>
+      ev.preventDefault(),
+    );
     this.tasksContainer.addEventListener("drop", (ev) => {
       ev.preventDefault();
       const taskId = ev.dataTransfer!.getData("text/plain");
@@ -59,7 +64,10 @@ export class Tasks extends Component {
       let sourceContext: TasksContext | null = null;
 
       for (const context of this.props.allContexts) {
-        const found = context.tasks.find((task: { id: string, title: string, content: string }) => task.id === taskId);
+        const found = context.tasks.find(
+          (task: { id: string; title: string; content: string }) =>
+            task.id === taskId,
+        );
 
         if (found) {
           taskObj = found;
@@ -68,7 +76,11 @@ export class Tasks extends Component {
         }
       }
 
-      if (taskObj && sourceContext && sourceContext !== this.props.tasksContext) {
+      if (
+        taskObj &&
+        sourceContext &&
+        sourceContext !== this.props.tasksContext
+      ) {
         sourceContext.delete(taskId); // delete from prev context
         this.props.tasksContext.add(taskObj); // add to current context
       }
