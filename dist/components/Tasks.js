@@ -10,7 +10,7 @@ export class Tasks extends Component {
         this.props.tasksContext.subscribe(this.renderTasks);
     }
     handleAddTask() {
-        this.props.tasksContext.add(new TaskContext("", ""));
+        this.props.tasksContext.add(new TaskContext("", "", ""));
     }
     renderTasks(tasklist) {
         this.state.tasks = tasklist;
@@ -33,7 +33,7 @@ export class Tasks extends Component {
         tasksList.innerHTML = `
       <div class="d-flex justify-content-between align-items-center mb-5">
         <h1>${this.props.tasksContext.type}</h1>
-        <button class="add-btn">+</button>
+        <button class="add-btn bg-transparent border border-0"><i class="fa-solid fa-plus fa-lg"></i></button>
       </div>
     `;
         this.tasksContainer = document.createElement("div");
@@ -52,7 +52,9 @@ export class Tasks extends Component {
                     break; // end the loop
                 }
             }
-            if (taskObj && sourceContext && sourceContext !== this.props.tasksContext) {
+            if (taskObj &&
+                sourceContext &&
+                sourceContext !== this.props.tasksContext) {
                 sourceContext.delete(taskId); // delete from prev context
                 this.props.tasksContext.add(taskObj); // add to current context
             }

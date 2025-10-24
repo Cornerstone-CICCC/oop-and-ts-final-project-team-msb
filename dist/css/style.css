@@ -1,13 +1,31 @@
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+:root {
+  --bg: #1a1a1a;
+  --text: #eaeaea;
+  --card-bg: #2a2a2a;
+  --column-bg: #d6d6d6;
+  --accent: #a29bfe;
+}
+
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
@@ -20,7 +38,12 @@ body {
 }
 
 .task-item-container {
-  height: 100%;
+  height: 700px;
+  overflow-y: auto;
+}
+
+.task-item-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* ----- Modal 디자인 강화 ----- */
