@@ -1,9 +1,11 @@
 export class TaskContext {
-    constructor(type, title, content) {
+    constructor(type, title, content, priority, dueDate) {
         this.id = crypto.randomUUID();
         this.type = type;
         this.title = title;
         this.content = content;
+        this.priority = priority;
+        this.dueDate = dueDate;
     }
 }
 export class TasksContext {

@@ -86,6 +86,8 @@ export class Task extends Component {
                     type: updated.type,
                     title: updated.title,
                     content: updated.content,
+                    priority: updated.priority,
+                    dueDate: updated.dueDate,
                 });
             },
             onClose: () => { },
