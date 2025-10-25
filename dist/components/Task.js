@@ -1,7 +1,8 @@
 import { Component } from "../common/Component.js";
+import { Modal } from "./Modal.js";
 export class Task extends Component {
     render() {
-        var _a;
+        var _a, _b;
         const taskItem = document.createElement("div");
         taskItem.classList = "task-item border border-dark px-3 py-2 mb-4";
         taskItem.draggable = true;
@@ -37,6 +38,10 @@ export class Task extends Component {
         (_a = taskItem.querySelector(".delete-btn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
             this.handleDeleteTask();
         });
+        /* ---------------------------*/
+        (_b = taskItem.querySelector(".update-btn")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+            this.openModal();
+        });
         const inputType = taskItem.querySelector("#input-type");
         inputType.addEventListener("change", () => {
             this.handleEditTask(inputType.value, this.props.task.title, this.props.task.content);
@@ -71,30 +76,28 @@ export class Task extends Component {
             title: taskTitle,
             content: taskDes,
         });
-        /*// 모달 생성, mount -> body에 붙임
+    }
+    /*-----------------------------*/
+    openModal() {
         const modal = new Modal({
-          task: this.props.task,
-          onSave: (updated) => {
-            // TasksContext.update 호출
-            this.props.tasksContext.update(this.props.task.id, {
-              title: updated.title,
-              content: updated.content,
-            });
-          },
-          onClose: () => {
-            // 필요시 추가 동작
-          },
+            task: this.props.task,
+            onSave: (updated) => {
+                this.props.tasksContext.update(this.props.task.id, {
+                    type: updated.type,
+                    title: updated.title,
+                    content: updated.content,
+                });
+            },
+            onClose: () => { },
         });
-    
-        // body에 모달 마운트 (항상 최상위)
-        modal.mount(document.body as HTMLElement);*/
+        modal.mount(document.body);
     }
     handleDeleteTask() {
         this.props.tasksContext.delete(this.props.task.id);
     }
 }
 Task.firstRender = true;
-/* escapeHtml 유틸 (중복되므로 나중에 common/util로 뺄 수 있음) */
+/*----------------------------*/
 function escapeHtml(str) {
     return String(str)
         .replace(/&/g, "&amp;")

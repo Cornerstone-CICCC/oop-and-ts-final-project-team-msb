@@ -17,19 +17,14 @@ export class Modal extends Component {
           <button class="modal-close">✕</button>
         </header>
         <div class="modal-body">
+          <label>Type</label>
+          <input class="modal-input type-input" type="text" value="${escapeHtml(this.props.task.type)}" />
+
           <label>Title</label>
           <input class="modal-input title-input" type="text" value="${escapeHtml(this.props.task.title)}" />
 
           <label>Description</label>
-          <textarea class="modal-input content-input" rows="5">${escapeHtml(this.props.task.content)}</textarea>
-
-          <label>Category</label>
-          <select class="modal-input category-input">
-            <option value="">None</option>
-            <option value="Bug">Bug</option>
-            <option value="Feature">Feature</option>
-            <option value="Improvement">Improvement</option>
-          </select>
+          <textarea class="modal-input content-input" rows="3">${escapeHtml(this.props.task.content)}</textarea>
 
           <label>Priority</label>
           <select class="modal-input priority-input">
@@ -40,14 +35,6 @@ export class Modal extends Component {
 
           <label>Due Date</label>
           <input class="modal-input due-input" type="date" />
-          
-          <div class="modal-preview">
-            <h4>Preview</h4>
-            <div class="preview-card">
-              <h5 class="preview-title">${escapeHtml(this.props.task.title)}</h5>
-              <p class="preview-content">${escapeHtml(this.props.task.content)}</p>
-            </div>
-          </div>
         </div>
         <footer class="modal-footer">
           <button class="btn btn-cancel">Cancel</button>
@@ -55,27 +42,24 @@ export class Modal extends Component {
         </footer>
       </div>
     `;
+        const typeInput = wrapper.querySelector(".type-input");
         const titleInput = wrapper.querySelector(".title-input");
         const contentInput = wrapper.querySelector(".content-input");
-        const previewTitle = wrapper.querySelector(".preview-title");
-        const previewContent = wrapper.querySelector(".preview-content");
-        // 실시간 미리보기
-        titleInput.addEventListener("input", () => (previewTitle.textContent = titleInput.value));
-        contentInput.addEventListener("input", () => (previewContent.textContent = contentInput.value));
+        // 닫기 버튼 및 배경 클릭 시 닫기
         (_a = wrapper
             .querySelector(".modal-overlay")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => this.close());
         (_b = wrapper
             .querySelector(".modal-close")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => this.close());
         (_c = wrapper
             .querySelector(".btn-cancel")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => this.close());
+        // 저장 시 onSave 호출
         (_d = wrapper.querySelector(".btn-save")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
-            const categoryInput = wrapper.querySelector(".category-input");
             const priorityInput = wrapper.querySelector(".priority-input");
             const dueInput = wrapper.querySelector(".due-input");
             this.props.onSave({
+                type: typeInput.value,
                 title: titleInput.value,
                 content: contentInput.value,
-                category: categoryInput.value,
                 priority: priorityInput.value,
                 dueDate: dueInput.value,
             });

@@ -4,10 +4,10 @@ import { TaskContext } from "../contexts/TasksContext.js";
 type ModalProps = {
   task: TaskContext;
   onSave: (updated: {
+    type?: string;
     title?: string;
     content?: string;
     priority?: string;
-    category?: string;
     dueDate?: string;
   }) => void;
   onClose?: () => void;
@@ -34,23 +34,20 @@ export class Modal extends Component {
           <button class="modal-close">✕</button>
         </header>
         <div class="modal-body">
+          <label>Type</label>
+          <input class="modal-input type-input" type="text" value="${escapeHtml(
+            this.props.task.type
+          )}" />
+
           <label>Title</label>
           <input class="modal-input title-input" type="text" value="${escapeHtml(
             this.props.task.title
           )}" />
 
           <label>Description</label>
-          <textarea class="modal-input content-input" rows="5">${escapeHtml(
+          <textarea class="modal-input content-input" rows="3">${escapeHtml(
             this.props.task.content
           )}</textarea>
-
-          <label>Category</label>
-          <select class="modal-input category-input">
-            <option value="">None</option>
-            <option value="Bug">Bug</option>
-            <option value="Feature">Feature</option>
-            <option value="Improvement">Improvement</option>
-          </select>
 
           <label>Priority</label>
           <select class="modal-input priority-input">
@@ -61,18 +58,6 @@ export class Modal extends Component {
 
           <label>Due Date</label>
           <input class="modal-input due-input" type="date" />
-          
-          <div class="modal-preview">
-            <h4>Preview</h4>
-            <div class="preview-card">
-              <h5 class="preview-title">${escapeHtml(
-                this.props.task.title
-              )}</h5>
-              <p class="preview-content">${escapeHtml(
-                this.props.task.content
-              )}</p>
-            </div>
-          </div>
         </div>
         <footer class="modal-footer">
           <button class="btn btn-cancel">Cancel</button>
@@ -81,27 +66,15 @@ export class Modal extends Component {
       </div>
     `;
 
+    const typeInput = wrapper.querySelector(".type-input") as HTMLInputElement;
     const titleInput = wrapper.querySelector(
       ".title-input"
     ) as HTMLInputElement;
     const contentInput = wrapper.querySelector(
       ".content-input"
     ) as HTMLTextAreaElement;
-    const previewTitle = wrapper.querySelector(".preview-title") as HTMLElement;
-    const previewContent = wrapper.querySelector(
-      ".preview-content"
-    ) as HTMLElement;
 
-    // 실시간 미리보기
-    titleInput.addEventListener(
-      "input",
-      () => (previewTitle.textContent = titleInput.value)
-    );
-    contentInput.addEventListener(
-      "input",
-      () => (previewContent.textContent = contentInput.value)
-    );
-
+    // 닫기 버튼 및 배경 클릭 시 닫기
     wrapper
       .querySelector(".modal-overlay")
       ?.addEventListener("click", () => this.close());
@@ -112,19 +85,17 @@ export class Modal extends Component {
       .querySelector(".btn-cancel")
       ?.addEventListener("click", () => this.close());
 
+    // 저장 시 onSave 호출
     wrapper.querySelector(".btn-save")?.addEventListener("click", () => {
-      const categoryInput = wrapper.querySelector(
-        ".category-input"
-      ) as HTMLSelectElement;
       const priorityInput = wrapper.querySelector(
         ".priority-input"
       ) as HTMLSelectElement;
       const dueInput = wrapper.querySelector(".due-input") as HTMLInputElement;
 
       this.props.onSave({
+        type: typeInput.value,
         title: titleInput.value,
         content: contentInput.value,
-        category: categoryInput.value,
         priority: priorityInput.value,
         dueDate: dueInput.value,
       });
