@@ -45,14 +45,12 @@ export class Modal extends Component {
         const typeInput = wrapper.querySelector(".type-input");
         const titleInput = wrapper.querySelector(".title-input");
         const contentInput = wrapper.querySelector(".content-input");
-        // 닫기 버튼 및 배경 클릭 시 닫기
         (_a = wrapper
             .querySelector(".modal-overlay")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => this.close());
         (_b = wrapper
             .querySelector(".modal-close")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => this.close());
         (_c = wrapper
             .querySelector(".btn-cancel")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => this.close());
-        // 저장 시 onSave 호출
         (_d = wrapper.querySelector(".btn-save")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
             const priorityInput = wrapper.querySelector(".priority-input");
             const dueInput = wrapper.querySelector(".due-input");

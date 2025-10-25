@@ -74,7 +74,6 @@ export class Modal extends Component {
       ".content-input"
     ) as HTMLTextAreaElement;
 
-    // 닫기 버튼 및 배경 클릭 시 닫기
     wrapper
       .querySelector(".modal-overlay")
       ?.addEventListener("click", () => this.close());
@@ -85,7 +84,6 @@ export class Modal extends Component {
       .querySelector(".btn-cancel")
       ?.addEventListener("click", () => this.close());
 
-    // 저장 시 onSave 호출
     wrapper.querySelector(".btn-save")?.addEventListener("click", () => {
       const priorityInput = wrapper.querySelector(
         ".priority-input"

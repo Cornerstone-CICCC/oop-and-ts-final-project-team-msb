@@ -50,8 +50,8 @@ body {
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center; /* 수직 중앙 */
-  justify-content: center; /* 수평 중앙 */
+  align-items: center;
+  justify-content: center;
   z-index: 9999;
 }
 
@@ -64,10 +64,10 @@ body {
 
 .modal {
   position: relative;
-  background: var(--card-bg); /* 기존 테마와 어울리는 색상 */
-  width: 380px; /* 너비 */
+  background: var(--card-bg);
+  width: 380px;
   max-width: 90%;
-  height: auto; /* 높이를 내용에 맞게 자동 조정 */
+  height: auto;
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -93,7 +93,7 @@ body {
 }
 
 .modal-body {
-  padding: 12px; /* 패딩 줄임 */
+  padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 6px;
