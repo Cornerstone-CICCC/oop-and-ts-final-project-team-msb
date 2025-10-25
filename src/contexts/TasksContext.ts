@@ -3,12 +3,22 @@ export class TaskContext {
   type: string;
   title: string;
   content: string;
+  priority?: string;
+  dueDate?: string;
 
-  constructor(type: string, title: string, content: string) {
+  constructor(
+    type: string,
+    title: string,
+    content: string,
+    priority?: string,
+    dueDate?: string
+  ) {
     this.id = crypto.randomUUID();
     this.type = type;
     this.title = title;
     this.content = content;
+    this.priority = priority;
+    this.dueDate = dueDate;
   }
 }
 

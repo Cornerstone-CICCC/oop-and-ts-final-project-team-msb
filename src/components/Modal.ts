@@ -33,6 +33,7 @@ export class Modal extends Component {
           <h3>Edit Task</h3>
           <button class="modal-close">✕</button>
         </header>
+
         <div class="modal-body">
           <label>Type</label>
           <input class="modal-input type-input" type="text" value="${escapeHtml(
@@ -51,14 +52,23 @@ export class Modal extends Component {
 
           <label>Priority</label>
           <select class="modal-input priority-input">
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
+            <option value="Low" ${
+              this.props.task.priority === "Low" ? "selected" : ""
+            }>Low</option>
+            <option value="Medium" ${
+              this.props.task.priority === "Medium" ? "selected" : ""
+            }>Medium</option>
+            <option value="High" ${
+              this.props.task.priority === "High" ? "selected" : ""
+            }>High</option>
           </select>
 
           <label>Due Date</label>
-          <input class="modal-input due-input" type="date" />
+          <input class="modal-input due-input" type="date" value="${
+            this.props.task.dueDate || ""
+          }" />
         </div>
+
         <footer class="modal-footer">
           <button class="btn btn-cancel">Cancel</button>
           <button class="btn btn-save">Save</button>
@@ -73,6 +83,10 @@ export class Modal extends Component {
     const contentInput = wrapper.querySelector(
       ".content-input"
     ) as HTMLTextAreaElement;
+    const priorityInput = wrapper.querySelector(
+      ".priority-input"
+    ) as HTMLSelectElement;
+    const dueInput = wrapper.querySelector(".due-input") as HTMLInputElement;
 
     wrapper
       .querySelector(".modal-overlay")
@@ -85,15 +99,11 @@ export class Modal extends Component {
       ?.addEventListener("click", () => this.close());
 
     wrapper.querySelector(".btn-save")?.addEventListener("click", () => {
-      const priorityInput = wrapper.querySelector(
-        ".priority-input"
-      ) as HTMLSelectElement;
-      const dueInput = wrapper.querySelector(".due-input") as HTMLInputElement;
-
+      // 변경 사항 전달
       this.props.onSave({
-        type: typeInput.value,
-        title: titleInput.value,
-        content: contentInput.value,
+        type: typeInput.value.trim(),
+        title: titleInput.value.trim(),
+        content: contentInput.value.trim(),
         priority: priorityInput.value,
         dueDate: dueInput.value,
       });
@@ -118,7 +128,7 @@ export class Modal extends Component {
 }
 
 function escapeHtml(str: string) {
-  return String(str)
+  return String(str || "")
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;")
