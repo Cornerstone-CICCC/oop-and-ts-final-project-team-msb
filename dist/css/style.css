@@ -1,4 +1,4 @@
-@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import '@fortawesome/fontawesome-free/css/all.min.css';
 
 :root {
   --bg: #1a1a1a;
@@ -25,8 +25,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--bg);
-  color: var(--text);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--card-bg);
+  font-family: 'Manrope', sans-serif;
 }
 
 .container {
@@ -42,13 +42,13 @@ body {
   padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0; 
+  gap: 0;
 }
 
 .task-column h1 {
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 0.75rem; 
+  margin-bottom: 0.75rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,6 +59,7 @@ body {
   color: #555;
   transition: color 0.2s ease;
 }
+
 .add-btn:hover i {
   color: #000;
 }
@@ -71,12 +72,111 @@ body {
   flex-direction: column;
   gap: 0.2rem;
   padding-top: 0;
-  margin-top: 0; 
+  margin-top: 0;
 }
-
 
 .task-item-container::-webkit-scrollbar {
   display: none;
+}
+
+/* =============== TASK CARD =============== */
+.task-item {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: white;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 0 !important;
+}
+
+.task-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* =============== INPUT FIELDS =============== */
+.task-item input[type="text"],
+.task-item textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.task-item input:focus,
+.task-item textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background-color: var(--card-bg);
+}
+
+.sub-type-edit-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.type-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.update-btn i,
+.delete-btn i {
+  color: #d6d6d6;
+  transition: color 0.2s;
+}
+
+.update-btn:hover i,
+.delete-btn:hover i {
+  color: var(--text);
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.task-column {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  background-color: #ddd;
+  border-radius: 20px;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 970px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .task-column {
+    width: 90%;
+    max-width: 360px;
+  }
 }
 
 .modal-wrapper {
