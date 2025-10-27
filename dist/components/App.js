@@ -6,11 +6,11 @@ export class App extends Component {
     render() {
         const app = document.createElement("div");
         app.className = "container";
+        // Base layout
         app.innerHTML = `
       <main class="main d-flex p-2 justify-content-between"></main>
-
     `;
-        // Collect all tasks from all contexts for the search functionality
+        // Collect all tasks from all contexts for search functionality
         const allTasks = [
             ...this.props.todoContext.tasks,
             ...this.props.inProContext.tasks,
@@ -21,11 +21,9 @@ export class App extends Component {
             alert(`Task selected: ${task.title}`);
             // TODO: Add scroll or highlight logic here if needed
         }).render();
-        // Create the main container for task columns
-        const main = document.createElement("main");
+        // Select main element from template
         const main = app.querySelector(".main");
-        main.className = "main d-flex p-2 justify-content-between";
-        // Pass contexts to each column (To Do, In Progress, Done)
+        // Pass contexts to each column
         const allContexts = [
             this.props.todoContext,
             this.props.inProContext,
@@ -47,8 +45,9 @@ export class App extends Component {
         main.append(todoColumn, inProColumn, doneColumn);
         // Create and append footer
         const footer = new Footer().render();
-        // Final app layout
-        app.append(header, main, footer);
+        // Final layout
+        app.prepend(header);
+        app.append(footer);
         return app;
     }
 }

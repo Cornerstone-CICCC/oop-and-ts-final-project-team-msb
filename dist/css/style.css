@@ -182,7 +182,10 @@ body {
   .task-column {
     width: 90%;
     max-width: 360px;
+    max-height: 70vh;     
+    overflow-y: auto; 
   }
+  
 }
 
 
