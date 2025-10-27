@@ -8,6 +8,7 @@
   --accent: #a29bfe;
 }
 
+/* =============== GLOBAL RESET =============== */
 * {
   margin: 0;
   padding: 0;
@@ -33,14 +34,46 @@ body {
   margin: auto;
 }
 
+/* =============== TASK COLUMN =============== */
 .task-column {
-  width: 400px;
+  width: 380px;
+  background-color: var(--column-bg);
+  border-radius: 20px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0; 
 }
 
+.task-column h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+}
+
+.add-btn i {
+  color: #555;
+  transition: color 0.2s ease;
+}
+.add-btn:hover i {
+  color: #000;
+}
+
+/* =============== TASK LIST CONTAINER =============== */
 .task-item-container {
   height: 700px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 0;
+  margin-top: 0; 
 }
+
 
 .task-item-container::-webkit-scrollbar {
   display: none;
