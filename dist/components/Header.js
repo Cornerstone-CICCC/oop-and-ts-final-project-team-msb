@@ -22,7 +22,9 @@ export class Header {
   padding: 1rem 2rem;
   background-color: #1a1a1a;
   color: #333;
-  position: relative;
+  position: sticky;       
+  top: 0;                 
+  z-index: 1000; 
   flex-wrap: wrap;
   gap: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
