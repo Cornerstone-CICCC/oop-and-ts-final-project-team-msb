@@ -1,5 +1,6 @@
 import { Component } from "../common/Component.js";
-
+import { Modal } from "./Modal.js";
+import { TaskContext } from "../contexts/TasksContext.js";
 export class Task extends Component {
   static firstRender = true;
 
@@ -60,12 +61,18 @@ export class Task extends Component {
       this.handleDeleteTask();
     });
 
+    /* ---------------------------*/
+
+    taskItem.querySelector(".update-btn")?.addEventListener("click", () => {
+      this.openModal();
+    });
+
     const inputType = taskItem.querySelector("#input-type") as HTMLInputElement;
     inputType.addEventListener("change", () => {
       this.handleEditTask(
         inputType.value,
         this.props.task.title,
-        this.props.task.content,
+        this.props.task.content
       );
       console.log(this.props.tasksContext.tasks);
     });
@@ -76,25 +83,25 @@ export class Task extends Component {
     }
 
     const inputTitle = taskItem.querySelector(
-      "#input-title",
+      "#input-title"
     ) as HTMLInputElement;
     inputTitle.addEventListener("change", () => {
       this.handleEditTask(
         this.props.task.type,
         inputTitle.value,
-        this.props.task.content,
+        this.props.task.content
       );
       console.log(this.props.tasksContext.tasks);
     });
 
     const inputDes = taskItem.querySelector(
-      "#input-content",
+      "#input-content"
     ) as HTMLInputElement;
     inputDes.addEventListener("change", () => {
       this.handleEditTask(
         this.props.task.type,
         this.props.task.title,
-        inputDes.value,
+        inputDes.value
       );
       console.log(this.props.tasksContext.tasks);
     });
@@ -105,7 +112,7 @@ export class Task extends Component {
         this.handleEditTask(
           this.props.task.type,
           this.props.task.title,
-          inputDes.value,
+          inputDes.value
         );
         console.log(this.props.tasksContext.tasks);
       }
@@ -122,7 +129,35 @@ export class Task extends Component {
     });
   }
 
+  /*-----------------------------*/
+  openModal() {
+    const modal = new Modal({
+      task: this.props.task,
+      onSave: (updated) => {
+        this.props.tasksContext.update(this.props.task.id, {
+          type: updated.type,
+          title: updated.title,
+          content: updated.content,
+          priority: updated.priority,
+          dueDate: updated.dueDate,
+        });
+      },
+      onClose: () => {},
+    });
+
+    modal.mount(document.body as HTMLElement);
+  }
+
   handleDeleteTask() {
     this.props.tasksContext.delete(this.props.task.id);
   }
+}
+/*----------------------------*/
+function escapeHtml(str: string) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }

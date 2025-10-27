@@ -1,7 +1,8 @@
 import { Component } from "../common/Component.js";
+import { Modal } from "./Modal.js";
 export class Task extends Component {
     render() {
-        var _a;
+        var _a, _b;
         const taskItem = document.createElement("div");
         taskItem.classList = "task-item border border-dark px-3 py-2 mb-4";
         taskItem.draggable = true;
@@ -54,6 +55,10 @@ export class Task extends Component {
         (_a = taskItem.querySelector(".delete-btn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
             this.handleDeleteTask();
         });
+        /* ---------------------------*/
+        (_b = taskItem.querySelector(".update-btn")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+            this.openModal();
+        });
         const inputType = taskItem.querySelector("#input-type");
         inputType.addEventListener("change", () => {
             this.handleEditTask(inputType.value, this.props.task.title, this.props.task.content);
@@ -89,9 +94,35 @@ export class Task extends Component {
             content: taskDes,
         });
     }
+    /*-----------------------------*/
+    openModal() {
+        const modal = new Modal({
+            task: this.props.task,
+            onSave: (updated) => {
+                this.props.tasksContext.update(this.props.task.id, {
+                    type: updated.type,
+                    title: updated.title,
+                    content: updated.content,
+                    priority: updated.priority,
+                    dueDate: updated.dueDate,
+                });
+            },
+            onClose: () => { },
+        });
+        modal.mount(document.body);
+    }
     handleDeleteTask() {
         this.props.tasksContext.delete(this.props.task.id);
     }
 }
 Task.firstRender = true;
+/*----------------------------*/
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
 //# sourceMappingURL=Task.js.map
