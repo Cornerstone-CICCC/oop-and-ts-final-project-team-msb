@@ -8,6 +8,7 @@
   --accent: #a29bfe;
 }
 
+/* =============== GLOBAL RESET =============== */
 * {
   margin: 0;
   padding: 0;
@@ -32,24 +33,29 @@ body {
   margin: auto;
 }
 
-/* Task Column */
+/* =============== TASK COLUMN =============== */
 .task-column {
-  width: 400px;
+  width: 380px;
   background-color: var(--column-bg);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
+  gap: 0; 
 }
 
+/* Título de columna */
 .task-column h1 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem; /* 🔧 controla el espacio justo debajo del título */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: #333;
 }
 
+/* Botón de añadir (+) */
 .add-btn i {
   color: #555;
   transition: color 0.2s ease;
@@ -58,32 +64,42 @@ body {
   color: #000;
 }
 
+/* =============== TASK LIST CONTAINER =============== */
 .task-item-container {
   height: 700px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.2rem;
+  padding-top: 0;
+  margin-top: 0; /* 🔧 agrega esto por si el contenedor lo hereda */
 }
+
 
 .task-item-container::-webkit-scrollbar {
   display: none;
 }
 
-/* Task Card */
+/* =============== TASK CARD =============== */
 .task-item {
   background-color: var(--card-bg);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  transition: all 0.2s ease-in-out;
+  border-radius: 20px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: white;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 0 !important;
 }
+
 .task-item:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
-/* Input fields */
+/* =============== INPUT FIELDS =============== */
 .task-item input[type="text"],
 .task-item textarea {
   width: 100%;
@@ -94,6 +110,7 @@ body {
   background-color: var(--bg);
   color: var(--text);
 }
+
 .task-item input:focus,
 .task-item textarea:focus {
   outline: none;
@@ -101,24 +118,40 @@ body {
   background-color: var(--card-bg);
 }
 
-/* Header dentro de la card */
 .sub-type-edit-btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.sub-type-edit-btn i {
-  color: var(--accent);
-  margin-right: 0.5rem;
+
+.sub-type-edit-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
 
-/* Botones editar/eliminar */
+.type-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
 .update-btn i,
 .delete-btn i {
-  color: var(--column-bg);
+  color: #d6d6d6; /* ← color solicitado */
   transition: color 0.2s;
 }
+
 .update-btn:hover i,
 .delete-btn:hover i {
-  color: var(--text);
+  color: var(--text); /* cambia a blanco (#eaeaea) al pasar el mouse */
 }
+
+

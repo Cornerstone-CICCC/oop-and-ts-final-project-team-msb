@@ -17,24 +17,28 @@ export class Header {
   
       const style = document.createElement("style");
       style.textContent = `
+      /* ======== BASE HEADER ======== */
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
-    background-color: #f4f4f4;
+    background-color: #1a1a1a;
     color: #333;
     position: relative;
+    flex-wrap: wrap;
+    gap: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
 
+  /* ======== SEARCH BAR ======== */
   .search-container {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     flex: 1;
     max-width: 400px;
-    background-color: #fff;
+    background-color: #2a2a2a;
     padding: 0.5rem 1rem;
     border-radius: 12px;
     border: 1px solid #ddd;
@@ -49,7 +53,7 @@ export class Header {
 
   .search-icon {
     font-size: 1rem;
-    color: #999;
+    color: #d6d6d6;
   }
 
   .search-input {
@@ -58,29 +62,60 @@ export class Header {
     outline: none;
     background: transparent;
     font-size: 1rem;
-    color: #333;
+    color: #eee;
   }
 
   .search-input::placeholder {
     color: #bbb;
   }
 
+  /* ======== TITLE ======== */
   .app-title {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     font-size: 1.6rem;
     font-weight: 600;
-    color: #333;
+    color: #d6d6d6;
+    white-space: nowrap;
   }
 
+  /* ======== INFO BUTTON ======== */
   .info-button {
     font-size: 1.2rem;
     cursor: pointer;
-    color: #888;
+    color: #d6d6d6;
+  }
+
+  /* ======== RESPONSIVE ======== */
+  @media (max-width: 1060px) {
+    .header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1rem;
+    }
+
+    .app-title {
+      display: none; /* 🔧 Oculta el título */
+    }
+
+    .search-container {
+      flex: 1;
+      max-width: none;
+      margin-right: 0.5rem;
+    }
+
+    .info-button {
+      font-size: 1.4rem;
+      color: #d6d6d6;
+    }
   }
 `;
-    
+  
+
+  
+  
       document.head.appendChild(style);
       return header;
     }
