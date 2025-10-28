@@ -303,14 +303,6 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
-.search-icon {
-  font-size: 1.3rem;
-  color: #d6d6d6;
-  position: absolute;
-  top: 15px;
-  left: 10px;
-}
-
 .search-input {
   padding: 0.5rem 0.5rem 0.5rem 2rem;
   background: transparent;
@@ -348,6 +340,8 @@ body {
 .search-result-item:hover {
   background-color: #444;
 }
+
+
 
 .app-title {
   grid-area: title;
